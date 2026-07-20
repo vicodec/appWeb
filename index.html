@@ -3,81 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi App Web</title>
+    <title>Colegio Divertido 🎒</title>
     <style>
-        /* Aquí mismo integramos el CSS para que sea más fácil */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial Rounded MT Bold', sans-serif; /* Letra amigable para niños */
         }
 
         body {
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: #FFFDE7; /* Amarillo pastel muy suave */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            padding: 15px;
             min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 350px;
         }
 
         h1 {
-            color: #4A90E2;
-            margin-bottom: 15px;
-            font-size: 24px;
+            color: #FF5722; /* Naranja llamativo */
+            font-size: 28px;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px #FFE0B2;
+            text-align: center;
         }
 
-        p {
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
-        .btn {
-            background-color: #4A90E2;
-            color: white;
-            border: none;
-            padding: 12px 24px;
+        .sub {
+            color: #4CAF50;
             font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.3s;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
-        .btn:active {
-            background-color: #357ABD;
+        /* Contenedor en cuadrícula (Grid) para los botones de juego */
+        .grid-juegos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        /* Estilo de los botones (Grandes y coloridos) */
+        .card-juego {
+            border: none;
+            border-radius: 20px;
+            padding: 25px 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 6px #ccc;
+            transition: all 0.1s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Efecto de hundido al presionar (como un juguete real) */
+        .card-juego:active {
+            box-shadow: 0 2px #666;
+            transform: translateY(4px);
+        }
+
+        /* Colores vivos para cada categoría */
+        .btn-letras { background-color: #E91E63; box-shadow: 0 6px #C2185B; } /* Rosado */
+        .btn-numeros { background-color: #2196F3; box-shadow: 0 6px #1976D2; } /* Azul */
+        .btn-colores { background-color: #FFEB3B; color: #333; box-shadow: 0 6px #FBC02D; } /* Amarillo */
+        .btn-formas { background-color: #9C27B0; box-shadow: 0 6px #7B1FA2; } /* Morado */
+
+        .emoji {
+            font-size: 40px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>¡Entorno Listo! 🚀</h1>
-        <p>Esta maravillosa interfaz está corriendo desde tu GitHub y cargándose en App Inventor.</p>
-        <button class="btn" onclick="enviarMensaje()">Presióname</button>
+    <h1>🏫 Mi Cole Virtual 🎒</h1>
+    <p class="sub">¡Toca un botón para aprender jugando!</p>
+
+    <div class="grid-juegos">
+        
+        <button class="card-juego btn-letras" onclick="jugar('letras')">
+            <span class="emoji">🅰️</span>
+            <span>Las Vocales</span>
+        </button>
+
+        <button class="card-juego btn-numeros" onclick="jugar('numeros')">
+            <span class="emoji">🔢</span>
+            <span>Los Números</span>
+        </button>
+
+        <button class="card-juego btn-colores" onclick="jugar('colores')">
+            <span class="emoji">🎨</span>
+            <span>Los Colores</span>
+        </button>
+
+        <button class="card-juego btn-formas" onclick="jugar('formas')">
+            <span class="emoji">📐</span>
+            <span>Las Formas</span>
+        </button>
+
     </div>
 
     <script>
-        // Esta función hablará con App Inventor en el futuro
-        function enviarMensaje() {
+        function jugar(tipoJuego) {
+            // Le avisamos a App Inventor qué botón tocó el niño
             if (window.AppInventor) {
-                window.AppInventor.setWebViewString("¡Hola desde el botón web!");
+                window.AppInventor.setWebViewString(tipoJuego);
             } else {
-                alert("Código funcionando en el navegador. Ábrelo en tu App de App Inventor.");
+                alert("Vas a jugar a: " + tipoJuego);
             }
         }
     </script>
