@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi App Web</title>
+    <style>
+        /* Aquí mismo integramos el CSS para que sea más fácil */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h1 {
+            color: #4A90E2;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .btn {
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn:active {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>¡Entorno Listo! 🚀</h1>
+        <p>Esta maravillosa interfaz está corriendo desde tu GitHub y cargándose en App Inventor.</p>
+        <button class="btn" onclick="enviarMensaje()">Presióname</button>
+    </div>
+
+    <script>
+        // Esta función hablará con App Inventor en el futuro
+        function enviarMensaje() {
+            if (window.AppInventor) {
+                window.AppInventor.setWebViewString("¡Hola desde el botón web!");
+            } else {
+                alert("Código funcionando en el navegador. Ábrelo en tu App de App Inventor.");
+            }
+        }
+    </script>
+
+</body>
+</html>
