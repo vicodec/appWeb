@@ -4,48 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colegio Addison 🏫</title>
-    <!-- Esta línea conecta el HTML con tu nuevo archivo CSS ordenado -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 1. PANTALLA DE CARGA -->
+    <!-- 1. PANTALLA DE CARGA (CON PORCENTAJE) -->
     <div id="pantalla-carga">
-        <div class="logo-addison">🏫</div>
+        <div class="logo-addison">🎒</div>
         <div class="titulo-colegio">Addison</div>
-        <div class="subtitulo-carga">Preparando la diversión...</div>
+        <div class="subtitulo-carga">¡Cargando la aventura! ✨</div>
         <div class="contenedor-barra">
             <div id="mi-barra" class="barra-progreso"></div>
         </div>
         <div id="porcentaje" class="texto-porcentaje">0%</div>
     </div>
 
-    <!-- 2. CONTENIDO PRINCIPAL -->
+    <!-- 2. SECCIÓN TIPO ÍNDICE (TEMAS) -->
     <div id="contenido-principal">
-        <h1>Colegio Addison 🏫</h1>
-        <p class="sub">¡Toca y aprende jugando!</p>
+        <h1>🏫 Colegio Addison 🎒</h1>
+        <p class="sub">¡Toca lo que quieras aprender hoy!</p>
 
         <div class="grid-juegos">
-            <button class="card-juego btn-letras" onclick="jugar('letras')">
+            
+            <button class="card-juego btn-vocales" onclick="seleccionarTema('vocales')">
                 <span class="emoji">🅰️</span>
-                <span>Vocales</span>
+                <span>Las Vocales</span>
             </button>
-            <button class="card-juego btn-numeros" onclick="jugar('numeros')">
+
+            <button class="card-juego btn-colores" onclick="seleccionarTema('colores')">
+                <span class="emoji">🎨</span>
+                <span>Los Colores</span>
+            </button>
+
+            <button class="card-juego btn-animales" onclick="seleccionarTema('animales')">
+                <span class="emoji">🦁</span>
+                <span>Animales</span>
+            </button>
+
+            <button class="card-juego btn-numeros" onclick="seleccionarTema('numeros')">
                 <span class="emoji">🔢</span>
                 <span>Números</span>
             </button>
-            <button class="card-juego btn-colores" onclick="jugar('colores')">
-                <span class="emoji">🎨</span>
-                <span>Colores</span>
+
+            <button class="card-juego btn-abecedario" onclick="seleccionarTema('abecedario')">
+                <span class="emoji">🔤</span>
+                <span>Abecedario</span>
             </button>
-            <button class="card-juego btn-formas" onclick="jugar('formas')">
+
+            <button class="card-juego btn-formas" onclick="seleccionarTema('formas')">
                 <span class="emoji">📐</span>
-                <span>Formas</span>
+                <span>Las Formas</span>
             </button>
+
+            <button class="card-juego btn-mas" style="grid-column: span 2;" onclick="seleccionarTema('sorpresa')">
+                <span class="emoji">🎁</span>
+                <span>¡Juego Sorpresa!</span>
+            </button>
+
         </div>
     </div>
 
     <script>
+        // Animación del porcentaje de carga
         let progreso = 0;
         const barra = document.getElementById('mi-barra');
         const textoPorcentaje = document.getElementById('porcentaje');
@@ -60,23 +80,26 @@
             if (progreso >= 100) {
                 clearInterval(intervalo);
                 
+                // Le avisa a App Inventor que la carga terminó por si quieres lanzar un sonido inicial
                 if (window.AppInventor) {
-                    window.AppInventor.setWebViewString("cargo_completo");
+                    window.AppInventor.setWebViewString("inicio_listo");
                 }
 
+                // Desvanecer pantalla de carga
                 pantallaCarga.style.opacity = '0';
                 setTimeout(() => {
                     pantallaCarga.style.display = 'none';
                     contenidoPrincipal.style.display = 'block';
                 }, 500);
             }
-        }, 35);
+        }, 40); // Tarda unos 4 segundos en cargar completo
 
-        function jugar(tipoJuego) {
+        // Función que envía el tema seleccionado a los bloques de App Inventor
+        function seleccionarTema(tema) {
             if (window.AppInventor) {
-                window.AppInventor.setWebViewString(tipoJuego);
+                window.AppInventor.setWebViewString(tema);
             } else {
-                alert("Abriendo juego: " + tipoJuego);
+                alert("Has seleccionado el tema: " + tema);
             }
         }
     </script>
