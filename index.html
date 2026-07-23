@@ -95,19 +95,26 @@
         }, 40); // Tarda unos 4 segundos en cargar completo
 
         // Función que envía el tema seleccionado a los bloques de App Inventor
-          function seleccionarTema(tema) {
-    if (tema === 'vocales') {
-        window.location.href = "vocales.html";
-    } else if (tema === 'colores') {
-        window.location.href = "colores.html";
-    } else {
-        if (window.AppInventor) {
-            window.AppInventor.setWebViewString(tema);
-        } else {
-            alert("Has seleccionado el tema: " + tema);
+              // Función que envía el tema seleccionado a los bloques de App Inventor o redirige en la Web
+        function seleccionarTema(tema) {
+            if (tema === 'vocales') {
+                window.location.href = "vocales.html";
+            } else if (tema === 'colores') {
+                window.location.href = "colores.html";
+            } else if (tema === 'animales') {
+                window.location.href = "animales.html";
+            } else {
+                if (window.AppInventor) {
+                    window.AppInventor.setWebViewString(tema);
+                } else {
+                    alert("Has seleccionado el tema: " + tema);
+                }
+            }
         }
-    }
-}
+    </script>
+
+</body>
+</html>
     </script>
 
 </body>
