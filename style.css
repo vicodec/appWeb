@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+}
+
+body {
+    background-color: #FFFDE7; /* Amarillo pastel */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* --- PANTALLA DE CARGA (SPLASH SCREEN) --- */
+#pantalla-carga {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #E3F2FD; /* Azul cielo suave */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.logo-addison {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: flotar 2s ease-in-out infinite;
+}
+
+.titulo-colegio {
+    color: #0D47A1;
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px #BBDEFB;
+}
+
+.subtitulo-carga {
+    color: #1565C0;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* Contenedor de la barra */
+.contenedor-barra {
+    width: 80%;
+    max-width: 280px;
+    height: 20px;
+    background-color: #FFF;
+    border-radius: 10px;
+    padding: 3px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* La barra interna que crece */
+.barra-progreso {
+    width: 0%;
+    height: 100%;
+    background-color: #4CAF50; /* Verde brillante */
+    border-radius: 8px;
+    transition: width 0.1s linear;
+}
+
+.texto-porcentaje {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #0D47A1;
+    font-weight: bold;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+#contenido-principal {
+    display: none;
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+}
+
+h1 {
+    color: #FF5722;
+    font-size: 28px;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px #FFE0B2;
+}
+
+.sub {
+    color: #4CAF50;
+    font-size: 16px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.grid-juegos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.card-juego {
+    border: none;
+    border-radius: 20px;
+    padding: 25px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px #ccc;
+    transition: all 0.1s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-juego:active {
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+}
+
+.btn-letras { background-color: #E91E63; box-shadow: 0 6px #C2185B; }
+.btn-numeros { background-color: #2196F3; box-shadow: 0 6px #1976D2; }
+.btn-colores { background-color: #FFEB3B; color: #333; box-shadow: 0 6px #FBC02D; }
+.btn-formas { background-color: #9C27B0; box-shadow: 0 6px #7B1FA2; }
+
+.emoji { font-size: 40px; }
