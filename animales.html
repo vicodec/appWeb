@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Animales - Addison</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contenedor-animales {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .jaula-magica {
+            background-color: white;
+            border: 8px solid #4CAF50;
+            border-radius: 30px;
+            width: 100%;
+            padding: 30px 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 0 #388E3C;
+        }
+
+        .animal-gigante {
+            font-size: 110px;
+            display: block;
+            margin-bottom: 10px;
+            filter: drop-shadow(2px 4px 0px rgba(0,0,0,0.1));
+            transition: transform 0.2s;
+        }
+
+        .animal-info {
+            font-size: 26px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .grid-animales {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .btn-animal {
+            background-color: #FFF;
+            border: 4px solid #FF9800;
+            border-radius: 20px;
+            padding: 10px 0;
+            font-size: 40px; /* Emojis grandes */
+            cursor: pointer;
+            box-shadow: 0 6px 0 #FB8C00;
+            transition: all 0.1s ease;
+        }
+
+        .btn-animal:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #FB8C00;
+        }
+
+        .btn-volver {
+            background-color: #607D8B;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #455A64;
+        }
+
+        .btn-volver:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #455A64;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-animales">
+        <h1>🦁 Los Animales 🐸</h1>
+        <p class="sub">¡Toca un animal para escuchar cómo hace!</p>
+
+        <!-- Pantalla interactiva del animal seleccionado -->
+        <div class="jaula-magica">
+            <span id="pantalla-emoji" class="animal-gigante">🦁</span>
+            <p id="pantalla-nombre" class="animal-info">¡El León!</p>
+        </div>
+
+        <!-- Botones de selección -->
+        <div class="grid-animales">
+            <button class="btn-animal" onclick="cambiarAnimal('🦁', '¡El León!', 'leon')">🦁</button>
+            <button class="btn-animal" onclick="cambiarAnimal('🐱', '¡El Gato!', 'gato')">🐱</button>
+            <button class="btn-animal" onclick="cambiarAnimal('🐶', '¡El Perro!', 'perro')">🐶</button>
+            <button class="btn-animal" onclick="cambiarAnimal('🐸', '¡La Rana!', 'rana')">🐸</button>
+            <button class="btn-animal" onclick="cambiarAnimal('🐮', '¡La Vaca!', 'vaca')">🐮</button>
+            <button class="btn-animal" onclick="cambiarAnimal('🦆', '¡El Pato!', 'pato')">🦆</button>
+        </div>
+
+        <!-- Volver -->
+        <button class="btn-volver" onclick="irAlMenu()">← Volver al Menú</button>
+    </div>
+
+    <script>
+        function cambiarAnimal(emoji, nombre, idVoz) {
+            const pantallaEmoji = document.getElementById('pantalla-emoji');
+            const pantallaNombre = document.getElementById('pantalla-nombre');
+
+            pantallaEmoji.innerText = emoji;
+            pantallaNombre.innerText = nombre;
+
+            // Animación de rebote al pulsar
+            pantallaEmoji.style.transform = 'scale(1.2) rotate(5deg)';
+            setTimeout(() => { pantallaEmoji.style.transform = 'scale(1) rotate(0deg)'; }, 200);
+
+            // IMPORTANTE: Envía el ID a App Inventor por si quieres poner sonidos reales de animales
+            if (window.AppInventor) {
+                window.AppInventor.setWebViewString("animal_" + idVoz);
+            }
+        }
+
+        function irAlMenu() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
