@@ -100,6 +100,7 @@
         }
 
         // --- AQUÍ ESTÁ LA FUNCIÓN ACTUALIZADA ---
+        // Función que envía el tema seleccionado a los bloques de App Inventor o redirige en la Web
         function seleccionarTema(tema) {
             if (tema === 'vocales') {
                 window.location.href = "vocales.html";
@@ -109,6 +110,9 @@
                 window.location.href = "animales.html";
             } else if (tema === 'numeros') {
                 window.location.href = "numeros.html";
+            } else if (tema === 'abecedario') {
+                // Esta nueva línea abre el juego del abecedario
+                window.location.href = "abecedario.html";
             } else {
                 if (window.AppInventor) {
                     window.AppInventor.setWebViewString(tema);
