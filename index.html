@@ -66,36 +66,44 @@
 
     <script>
         // Animación del porcentaje de carga
-        let progreso = 0;
+       let progreso = 0;
         const barra = document.getElementById('mi-barra');
         const textoPorcentaje = document.getElementById('porcentaje');
         const pantallaCarga = document.getElementById('pantalla-carga');
         const contenidoPrincipal = document.getElementById('contenido-principal');
 
-        const intervalo = setInterval(() => {
-            progreso += 1;
-            barra.style.width = progreso + '%';
-            textoPorcentaje.innerText = progreso + '%';
+        // --- TRUCO EVITAR PANTALLA DE CARGA ---
+        // Revisamos si la URL contiene "?menu=true"
+        const parametros = new URLSearchParams(window.location.search);
+        
+        if (parametros.get('menu') === 'true') {
+            // Si viene de regresar, ocultamos la carga al instante sin esperar
+            pantallaCarga.style.display = 'none';
+            contenidoPrincipal.style.display = 'block';
+        } else {
+            // Si es la primera vez que abre la app, corre la barrita normalmente
+            const intervalo = setInterval(() => {
+                progreso += 1;
+                barra.style.width = progreso + '%';
+                textoPorcentaje.innerText = progreso + '%';
 
-            if (progreso >= 100) {
-                clearInterval(intervalo);
-                
-                // Le avisa a App Inventor que la carga terminó por si quieres lanzar un sonido inicial
-                if (window.AppInventor) {
-                    window.AppInventor.setWebViewString("inicio_listo");
+                if (progreso >= 100) {
+                    clearInterval(intervalo);
+                    
+                    if (window.AppInventor) {
+                        window.AppInventor.setWebViewString("inicio_listo");
+                    }
+
+                    pantallaCarga.style.opacity = '0';
+                    setTimeout(() => {
+                        pantallaCarga.style.display = 'none';
+                        contenidoPrincipal.style.display = 'block';
+                    }, 500);
                 }
+            }, 40);
+        }
 
-                // Desvanecer pantalla de carga
-                pantallaCarga.style.opacity = '0';
-                setTimeout(() => {
-                    pantallaCarga.style.display = 'none';
-                    contenidoPrincipal.style.display = 'block';
-                }, 500);
-            }
-        }, 40); // Tarda unos 4 segundos en cargar completo
-
-        // Función que envía el tema seleccionado a los bloques de App Inventor
-              // Función que envía el tema seleccionado a los bloques de App Inventor o redirige en la Web
+        // Función que envía el tema seleccionado a los bloques de App Inventor o redirige en la Web
         function seleccionarTema(tema) {
             if (tema === 'vocales') {
                 window.location.href = "vocales.html";
