@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Colores - Addison</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para el juego de colores */
+        body {
+            transition: background-color 0.4s ease; /* Hace que el cambio de color sea suave */
+        }
+
+        .contenedor-colores {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .balde-pintura {
+            background-color: white;
+            border: 8px solid #4CAF50;
+            border-radius: 30px;
+            width: 100%;
+            padding: 40px 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 0 #388E3C;
+            transition: transform 0.2s;
+        }
+
+        .color-nombre {
+            font-size: 42px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+        }
+
+        /* Contenedor de las manchas de pintura */
+        .grid-manchas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .btn-mancha {
+            border: none;
+            background: none;
+            font-size: 65px; /* Emojis de manchas gigantes */
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            filter: drop-shadow(0px 6px 0px rgba(0,0,0,0.1));
+        }
+
+        .btn-mancha:active {
+            transform: scale(0.85) translateY(5px);
+        }
+
+        .btn-volver {
+            background-color: #607D8B;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #455A64;
+        }
+
+        .btn-volver:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #455A64;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-colores">
+        <h1 style="color: #333; text-shadow: 2px 2px 0px #FFF;">🎨 Los Colores 🖌️</h1>
+        <p class="sub" style="color: #333; text-shadow: 1px 1px 0px #FFF;">¡Toca una mancha para pintar la pantalla!</p>
+
+        <!-- Pizarra mágica que muestra el nombre del color -->
+        <div class="balde-pintura" id="pizarra-color">
+            <span id="texto-color" class="color-nombre">¡Elige un color!</span>
+        </div>
+
+        <!-- Botones de manchas de pintura -->
+        <div class="grid-manchas">
+            <!-- Rojo -->
+            <button class="btn-mancha" onclick="cambiarColor('#FFCDD2', '#E53935', '🔴 ¡Rojo! 🔴', 'rojo')">🔴</button>
+            <!-- Azul -->
+            <button class="btn-mancha" onclick="cambiarColor('#BBDEFB', '#1E88E5', '🔵 ¡Azul! 🔵', 'azul')">🔵</button>
+            <!-- Verde -->
+            <button class="btn-mancha" onclick="cambiarColor('#C8E6C9', '#43A047', '🟢 ¡Verde! 🟢', 'verde')">🟢</button>
+            <!-- Amarillo -->
+            <button class="btn-mancha" onclick="cambiarColor('#FFF9C4', '#FDD835', '🟡 ¡Amarillo! 🟡', 'amarillo')">🟡</button>
+            <!-- Naranja -->
+            <button class="btn-mancha" onclick="cambiarColor('#FFE0B2', '#FB8C00', '🟠 ¡Naranja! 🟠', 'naranja')">🟠</button>
+            <!-- Morado -->
+            <button class="btn-mancha" onclick="cambiarColor('#E1BEE7', '#8E24AA', '🟣 ¡Morado! 🟣', 'morado')">🟣</button>
+        </div>
+
+        <!-- Botón para regresar al índice principal -->
+        <button class="btn-volver" onclick="irAlMenu()">← Volver al Menú</button>
+    </div>
+
+    <script>
+        function cambiarColor(colorFondo, colorBorde, nombreColor, nombreId) {
+            // Cambia el fondo de toda la pantalla
+            document.body.style.backgroundColor = colorFondo;
+            
+            // Cambia la pizarra del medio
+            const pizarra = document.getElementById('pizarra-color');
+            const texto = document.getElementById('texto-color');
+            
+            pizarra.style.borderColor = colorBorde;
+            pizarra.style.boxShadow = `0 10px 0 ${colorBorde}`;
+            texto.innerText = nombreColor;
+            texto.style.color = colorBorde;
+
+            // Efecto brinco en la pizarra al cambiar
+            pizarra.style.transform = 'scale(1.05)';
+            setTimeout(() => { pizarra.style.transform = 'scale(1)'; }, 150);
+
+            // Avisamos a App Inventor por si luego quieres que el celular diga el color en voz alta
+            if (window.AppInventor) {
+                window.AppInventor.setWebViewString("color_" + nombreId);
+            }
+        }
+
+        function irAlMenu() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
