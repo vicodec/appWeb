@@ -52,9 +52,9 @@
 </button>
 
             <button class="card-juego btn-formas" onclick="seleccionarTema('formas')">
-                <span class="emoji">📐</span>
-                <span>Las Formas</span>
-            </button>
+    <span class="emoji">📐</span>
+    <span>Formas</span>
+</button>
 
             <button class="card-juego btn-mas" style="grid-column: span 2;" onclick="seleccionarTema('sorpresa')">
                 <span class="emoji">🎁</span>
@@ -101,6 +101,7 @@
 
         // --- AQUÍ ESTÁ LA FUNCIÓN ACTUALIZADA ---
         // Función que envía el tema seleccionado a los bloques de App Inventor o redirige en la Web
+        // Función que envía el tema seleccionado a los bloques de App Inventor o redirige en la Web
         function seleccionarTema(tema) {
             if (tema === 'vocales') {
                 window.location.href = "vocales.html";
@@ -111,8 +112,10 @@
             } else if (tema === 'numeros') {
                 window.location.href = "numeros.html";
             } else if (tema === 'abecedario') {
-                // Esta nueva línea abre el juego del abecedario
                 window.location.href = "abecedario.html";
+            } else if (tema === 'formas') {
+                // Esta línea abre el nuevo juego de las figuras geométricas
+                window.location.href = "formas.html";
             } else {
                 if (window.AppInventor) {
                     window.AppInventor.setWebViewString(tema);
