@@ -3,49 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colegio Divertido 🎒</title>
+    <title>Colegio Addison 🏫</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Arial Rounded MT Bold', sans-serif; /* Letra amigable para niños */
+            font-family: 'Arial Rounded MT Bold', sans-serif;
         }
 
         body {
-            background-color: #FFFDE7; /* Amarillo pastel muy suave */
+            background-color: #FFFDE7; /* Amarillo pastel */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px;
-            min-height: 100vh;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* --- PANTALLA DE CARGA (SPLASH SCREEN) --- */
+        #pantalla-carga {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #E3F2FD; /* Azul cielo suave */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .logo-addison {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: flotar 2s ease-in-out infinite;
+        }
+
+        .titulo-colegio {
+            color: #0D47A1;
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px #BBDEFB;
+        }
+
+        .subtitulo-carga {
+            color: #1565C0;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* Contenedor de la barra */
+        .contenedor-barra {
+            width: 80%;
+            max-width: 280px;
+            height: 20px;
+            background-color: #FFF;
+            border-radius: 10px;
+            padding: 3px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* La barra interna que crece */
+        .barra-progreso {
+            width: 0%;
+            height: 100%;
+            background-color: #4CAF50; /* Verde brillante */
+            border-radius: 8px;
+            transition: width 0.1s linear;
+        }
+
+        .texto-porcentaje {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #0D47A1;
+            font-weight: bold;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- CONTENIDO PRINCIPAL (Oculto al inicio) --- */
+        #contenido-principal {
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 360px;
         }
 
         h1 {
-            color: #FF5722; /* Naranja llamativo */
+            color: #FF5722;
             font-size: 28px;
             margin-bottom: 5px;
             text-shadow: 2px 2px #FFE0B2;
-            text-align: center;
         }
 
         .sub {
             color: #4CAF50;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: bold;
         }
 
-        /* Contenedor en cuadrícula (Grid) para los botones de juego */
         .grid-juegos {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             width: 100%;
-            max-width: 360px;
         }
 
-        /* Estilo de los botones (Grandes y coloridos) */
         .card-juego {
             border: none;
             border-radius: 20px;
@@ -62,59 +136,93 @@
             gap: 10px;
         }
 
-        /* Efecto de hundido al presionar (como un juguete real) */
         .card-juego:active {
             box-shadow: 0 2px #666;
             transform: translateY(4px);
         }
 
-        /* Colores vivos para cada categoría */
-        .btn-letras { background-color: #E91E63; box-shadow: 0 6px #C2185B; } /* Rosado */
-        .btn-numeros { background-color: #2196F3; box-shadow: 0 6px #1976D2; } /* Azul */
-        .btn-colores { background-color: #FFEB3B; color: #333; box-shadow: 0 6px #FBC02D; } /* Amarillo */
-        .btn-formas { background-color: #9C27B0; box-shadow: 0 6px #7B1FA2; } /* Morado */
+        .btn-letras { background-color: #E91E63; box-shadow: 0 6px #C2185B; }
+        .btn-numeros { background-color: #2196F3; box-shadow: 0 6px #1976D2; }
+        .btn-colores { background-color: #FFEB3B; color: #333; box-shadow: 0 6px #FBC02D; }
+        .btn-formas { background-color: #9C27B0; box-shadow: 0 6px #7B1FA2; }
 
-        .emoji {
-            font-size: 40px;
-        }
+        .emoji { font-size: 40px; }
     </style>
 </head>
 <body>
 
-    <h1>🏫 Mi Cole Virtual 🎒</h1>
-    <p class="sub">¡Toca un botón para aprender jugando!</p>
+    <!-- 1. PANTALLA DE CARGA -->
+    <div id="pantalla-carga">
+        <div class="logo-addison">🏫</div>
+        <div class="titulo-colegio">Addison</div>
+        <div class="subtitulo-carga">Preparando la diversión...</div>
+        <div class="contenedor-barra">
+            <div id="mi-barra" class="barra-progreso"></div>
+        </div>
+        <div id="porcentaje" class="texto-porcentaje">0%</div>
+    </div>
 
-    <div class="grid-juegos">
-        
-        <button class="card-juego btn-letras" onclick="jugar('letras')">
-            <span class="emoji">🅰️</span>
-            <span>Las Vocales</span>
-        </button>
+    <!-- 2. CONTENIDO PRINCIPAL -->
+    <div id="contenido-principal">
+        <h1>🎒 Colegio Addison 🏫</h1>
+        <p class="sub">¡Toca y aprende jugando!</p>
 
-        <button class="card-juego btn-numeros" onclick="jugar('numeros')">
-            <span class="emoji">🔢</span>
-            <span>Los Números</span>
-        </button>
-
-        <button class="card-juego btn-colores" onclick="jugar('colores')">
-            <span class="emoji">🎨</span>
-            <span>Los Colores</span>
-        </button>
-
-        <button class="card-juego btn-formas" onclick="jugar('formas')">
-            <span class="emoji">📐</span>
-            <span>Las Formas</span>
-        </button>
-
+        <div class="grid-juegos">
+            <button class="card-juego btn-letras" onclick="jugar('letras')">
+                <span class="emoji">🅰️</span>
+                <span>Vocales</span>
+            </button>
+            <button class="card-juego btn-numeros" onclick="jugar('numeros')">
+                <span class="emoji">🔢</span>
+                <span>Números</span>
+            </button>
+            <button class="card-juego btn-colores" onclick="jugar('colores')">
+                <span class="emoji">🎨</span>
+                <span>Colores</span>
+            </button>
+            <button class="card-juego btn-formas" onclick="jugar('formas')">
+                <span class="emoji">📐</span>
+                <span>Formas</span>
+            </button>
+        </div>
     </div>
 
     <script>
+        // Lógica de la barra de carga animada en porcentaje
+        let progreso = 0;
+        const barra = document.getElementById('mi-barra');
+        const textoPorcentaje = document.getElementById('porcentaje');
+        const pantallaCarga = document.getElementById('pantalla-carga');
+        const contenidoPrincipal = document.getElementById('contenido-principal');
+
+        const intervalo = setInterval(() => {
+            progreso += 1;
+            barra.style.width = progreso + '%';
+            textoPorcentaje.innerText = progreso + '%';
+
+            // Al llegar al 100%, ocultamos la carga y mostramos el menú
+            if (progreso >= 100) {
+                clearInterval(intervalo);
+                
+                // Pequeño aviso opcional a App Inventor de que ya cargó
+                if (window.AppInventor) {
+                    window.AppInventor.setWebViewString("cargo_completo");
+                }
+
+                // Transición visual
+                pantallaCarga.style.opacity = '0';
+                setTimeout(() => {
+                    pantallaCarga.style.display = 'none';
+                    contenidoPrincipal.style.display = 'block';
+                }, 500);
+            }
+        }, 35); // Velocidad de la carga (aproximadamente 3.5 segundos en total)
+
         function jugar(tipoJuego) {
-            // Le avisamos a App Inventor qué botón tocó el niño
             if (window.AppInventor) {
                 window.AppInventor.setWebViewString(tipoJuego);
             } else {
-                alert("Vas a jugar a: " + tipoJuego);
+                alert("Abriendo juego: " + tipoJuego);
             }
         }
     </script>
