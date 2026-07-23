@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los Números - Addison</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contenedor-numeros {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .tablero-conteo {
+            background-color: white;
+            border: 8px solid #00BCD4;
+            border-radius: 30px;
+            width: 100%;
+            padding: 30px 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 0 #0097A7;
+        }
+
+        .numero-gigante {
+            font-size: 120px;
+            font-weight: bold;
+            color: #00BCD4;
+            display: block;
+            line-height: 1;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        .objetos-conteo {
+            font-size: 35px;
+            min-height: 50px;
+            letter-spacing: 5px;
+        }
+
+        .grid-numeros {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .btn-numero {
+            background-color: #FFF;
+            border: 4px solid #00BCD4;
+            border-radius: 20px;
+            padding: 15px 0;
+            font-size: 32px;
+            font-weight: bold;
+            color: #0097A7;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #0097A7;
+            transition: all 0.1s ease;
+        }
+
+        .btn-numero:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #0097A7;
+            background-color: #E0F7FA;
+        }
+
+        .btn-volver {
+            background-color: #607D8B;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #455A64;
+        }
+
+        .btn-volver:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #455A64;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-numeros">
+        <h1>🔢 ¡A Contar! 🔢</h1>
+        <p class="sub">¡Toca un número para contar los juguetes!</p>
+
+        <!-- Pizarra interactiva de conteo -->
+        <div class="tablero-conteo">
+            <span id="pantalla-num" class="numero-gigante">1</span>
+            <div id="pantalla-objetos" class="objetos-conteo">🚗</div>
+        </div>
+
+        <!-- Teclado Numérico -->
+        <div class="grid-numeros">
+            <button class="btn-numero" onclick="cambiarNumero(1, '🚗', '#00BCD4')">1</button>
+            <button class="btn-numero" onclick="cambiarNumero(2, '🚀🚀', '#FF5722')">2</button>
+            <button class="btn-numero" onclick="cambiarNumero(3, '🧸🧸🧸', '#4CAF50')">3</button>
+            <button class="btn-numero" onclick="cambiarNumero(4, '🍎🍎🍎🍎', '#FF2A6D')">4</button>
+            <button class="btn-numero" onclick="cambiarNumero(5, '⭐⭐⭐⭐⭐', '#FFB300')">5</button>
+            <button class="btn-numero" onclick="cambiarNumero(6, '🎈🎈🎈🎈🎈🎈', '#9C27B0')">6</button>
+        </div>
+
+        <!-- Botón Volver con el truco anti-carga incorporado -->
+        <button class="btn-volver" onclick="irAlMenu()">← Volver al Menú</button>
+    </div>
+
+    <script>
+        function cambiarNumero(num, objetos, color) {
+            const pantallaNum = document.getElementById('pantalla-num');
+            const pantallaObjetos = document.getElementById('pantalla-objetos');
+
+            pantallaNum.innerText = num;
+            pantallaNum.style.color = color;
+            pantallaObjetos.innerText = objetos;
+
+            // Animación divertida
+            pantallaNum.style.transform = 'scale(1.2)';
+            setTimeout(() => { pantallaNum.style.transform = 'scale(1)'; }, 150);
+
+            // Aviso a App Inventor por si quieres voz nativa ("Uno", "Dos", etc.)
+            if (window.AppInventor) {
+                window.AppInventor.setWebViewString("numero_" + num);
+            }
+        }
+
+        function irAlMenu() {
+            // Regresa usando el truco para saltarse la carga
+            window.location.href = "index.html?menu=true";
+        }
+    </script>
+
+</body>
+</html>
