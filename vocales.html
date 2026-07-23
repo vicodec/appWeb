@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Vocales - Addison</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para el juego de vocales */
+        .contenedor-vocales {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .pizarra {
+            background-color: white;
+            border: 8px solid #FFB300;
+            border-radius: 30px;
+            width: 100%;
+            padding: 30px 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 0 #F59F00;
+        }
+
+        .letra-gigante {
+            font-size: 120px;
+            font-weight: bold;
+            color: #FF2A6D;
+            display: block;
+            line-height: 1;
+            margin-bottom: 10px;
+            animation: saltar Letra 1s ease infinite alternate;
+        }
+
+        .palabra-ejemplo {
+            font-size: 26px;
+            color: #333;
+        }
+
+        .grid-letras {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .btn-vocal {
+            border: none;
+            border-radius: 15px;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn-vocal:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Colores individuales para las teclas de las vocales */
+        .v-a { background-color: #FF2A6D; }
+        .v-e { background-color: #FFB300; }
+        .v-i { background-color: #4CAF50; }
+        .v-o { background-color: #00BCD4; }
+        .v-u { background-color: #9C27B0; }
+
+        .btn-volver {
+            background-color: #607D8B;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #455A64;
+        }
+
+        .btn-volver:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #455A64;
+        }
+
+        @keyframes saltarLetra {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-vocales">
+        <h1>🅰️ Las Vocales 🅾️</h1>
+        <p class="sub">¡Toca una letra para descubrir su magia!</p>
+
+        <!-- Pizarra interactiva que cambia según la vocal pulsada -->
+        <div class="pizarra">
+            <span id="pantalla-letra" class="letra-gigante">A</span>
+            <p id="pantalla-texto" class="palabra-ejemplo">✈️ de <b>Avión</b></p>
+        </div>
+
+        <!-- Teclado de vocales -->
+        <div class="grid-letras">
+            <button class="btn-vocal v-a" onclick="cambiarVocal('A', '✈️ de Avión', '#FF2A6D')">A</button>
+            <button class="btn-vocal v-e" onclick="cambiarVocal('E', '🐘 de Elefante', '#FFB300')">E</button>
+            <button class="btn-vocal v-i" onclick="cambiarVocal('I', '🏝️ de Iguana', '#4CAF50')">I</button>
+            <button class="btn-vocal v-o" onclick="cambiarVocal('O', '🐻 de Oso', '#00BCD4')">O</button>
+            <button class="btn-vocal v-u" onclick="cambiarVocal('U', '🍇 de Uva', '#9C27B0')">U</button>
+        </div>
+
+        <!-- Botón para regresar al índice principal -->
+        <button class="btn-volver" onclick="irAlMenu()">← Volver al Menú</button>
+    </div>
+
+    <script>
+        // Datos de las vocales para cambiar la pantalla dinámicamente
+        function cambiarVocal(letra, texto, color) {
+            const pantallaLetra = document.getElementById('pantalla-letra');
+            const pantallaTexto = document.getElementById('pantalla-texto');
+
+            pantallaLetra.innerText = letra;
+            pantallaLetra.style.color = color;
+            pantallaTexto.innerHTML = texto;
+
+            // Mandamos aviso a App Inventor por si acaso en el futuro quieres sonido nativo
+            if (window.AppInventor) {
+                window.AppInventor.setWebViewString("vocal_" + letra.toLowerCase());
+            }
+        }
+
+        function irAlMenu() {
+            // Regresa a la pantalla principal (index.html)
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>
