@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Abecedario - Addison</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contenedor-abecedario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .pizarra-abc {
+            background-color: white;
+            border: 8px solid #E91E63;
+            border-radius: 30px;
+            width: 100%;
+            padding: 25px 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 0 #C2185B;
+        }
+
+        .letra-gigante {
+            font-size: 100px;
+            font-weight: bold;
+            color: #E91E63;
+            display: block;
+            line-height: 1;
+            margin-bottom: 10px;
+            transition: transform 0.2s;
+        }
+
+        .abc-info {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .grid-abc {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 25px;
+            max-height: 300px;
+            overflow-y: auto; /* Por si son muchas letras en pantallas pequeñas */
+            padding: 5px;
+        }
+
+        .btn-letra {
+            background-color: #FFF;
+            border: 3px solid #E91E63;
+            border-radius: 15px;
+            padding: 10px 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #E91E63;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #C2185B;
+            transition: all 0.1s ease;
+        }
+
+        .btn-letra:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #C2185B;
+            background-color: #FCE4EC;
+        }
+
+        .btn-volver {
+            background-color: #607D8B;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #455A64;
+        }
+
+        .btn-volver:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #455A64;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-abecedario">
+        <h1>🔤 El Abecedario 🔤</h1>
+        <p class="sub">¡Toca una letra para descubrir su palabra!</p>
+
+        <!-- Pizarra interactiva -->
+        <div class="pizarra-abc" id="pizarra">
+            <span id="pantalla-letra" class="letra-gigante">A</span>
+            <p id="pantalla-texto" class="abc-info">🍎 de Árbol</p>
+        </div>
+
+        <!-- Rejilla del Abecedario (A-Z) -->
+        <div class="grid-abc">
+            <button class="btn-letra" onclick="cambiarLetra('A', '🍎 de Árbol')">A</button>
+            <button class="btn-letra" onclick="cambiarLetra('B', '🍿 de Barco')">B</button>
+            <button class="btn-letra" onclick="cambiarLetra('C', '🏠 de Casa')">C</button>
+            <button class="btn-letra" onclick="cambiarLetra('D', '🎲 de Dado')">D</button>
+            <button class="btn-letra" onclick="cambiarLetra('E', '🌟 de Estrella')">E</button>
+            <button class="btn-letra" onclick="cambiarLetra('F', '🌻 de Flor')">F</button>
+            <button class="btn-letra" onclick="cambiarLetra('G', '🐱 de Gato')">G</button>
+            <button class="btn-letra" onclick="cambiarLetra('H', '🍦 de Helado')">H</button>
+            <button class="btn-letra" onclick="cambiarLetra('I', '⛺ de Isla')">I</button>
+            <button class="btn-letra" onclick="cambiarLetra('J', '🦒 de Jirafa')">J</button>
+            <button class="btn-letra" onclick="cambiarLetra('K', '🥝 de Kiwi')">K</button>
+            <button class="btn-letra" onclick="cambiarLetra('L', '🦁 de León')">L</button>
+            <button class="btn-letra" onclick="cambiarLetra('M', '🍎 de Manzana')">M</button>
+            <button class="btn-letra" onclick="cambiarLetra('N', '☁️ de Nube')">N</button>
+            <button class="btn-letra" onclick="cambiarLetra('Ñ', '🦡 de Ñandú')">Ñ</button>
+            <button class="btn-letra" onclick="cambiarLetra('O', '🐻 de Oso')">O</button>
+            <button class="btn-letra" onclick="cambiarLetra('P', '🎈 de Perro')">P</button>
+            <button class="btn-letra" onclick="cambiarLetra('Q', '🧀 de Queso')">Q</button>
+            <button class="btn-letra" onclick="cambiarLetra('R', '🤖 de Ratón')">R</button>
+            <button class="btn-letra" onclick="cambiarLetra('S', '☀️ de Sol')">S</button>
+            <button class="btn-letra" onclick="cambiarLetra('T', '🐢 de Tortuga')">T</button>
+            <button class="btn-letra" onclick="cambiarLetra('U', '🍇 de Uva')">U</button>
+            <button class="btn-letra" onclick="cambiarLetra('V', '🐄 de Vaca')">V</button>
+            <button class="btn-letra" onclick="cambiarLetra('W', '🧇 de Waffle')">W</button>
+            <button class="btn-letra" onclick="cambiarLetra('X', '🪕 de Xilófono')">X</button>
+            <button class="btn-letra" onclick="cambiarLetra('Y', '🪀 de Yo-yo')">Y</button>
+            <button class="btn-letra" onclick="cambiarLetra('Z', '🦊 de Zorro')">Z</button>
+        </div>
+
+        <button class="btn-volver" onclick="irAlMenu()">← Volver al Menú</button>
+    </div>
+
+    <script>
+        function cambiarLetra(letra, texto) {
+            const pantallaLetra = document.getElementById('pantalla-letra');
+            const pantallaTexto = document.getElementById('pantalla-texto');
+
+            pantallaLetra.innerText = letra;
+            pantallaTexto.innerText = texto;
+
+            // Animación
+            pantallaLetra.style.transform = 'scale(1.2)';
+            setTimeout(() => { pantallaLetra.style.transform = 'scale(1)'; }, 150);
+
+            if (window.AppInventor) {
+                window.AppInventor.setWebViewString("abc_" + letra.toLowerCase());
+            }
+        }
+
+        function irAlMenu() {
+            window.location.href = "index.html?menu=true";
+        }
+    </script>
+
+</body>
+</html>
