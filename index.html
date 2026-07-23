@@ -95,9 +95,11 @@
         }, 40); // Tarda unos 4 segundos en cargar completo
 
         // Función que envía el tema seleccionado a los bloques de App Inventor
-        function seleccionarTema(tema) {
+          function seleccionarTema(tema) {
     if (tema === 'vocales') {
         window.location.href = "vocales.html";
+    } else if (tema === 'colores') {
+        window.location.href = "colores.html";
     } else {
         if (window.AppInventor) {
             window.AppInventor.setWebViewString(tema);
