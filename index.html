@@ -65,23 +65,19 @@
     </div>
 
     <script>
-        // Animación del porcentaje de carga
-       let progreso = 0;
+        let progreso = 0;
         const barra = document.getElementById('mi-barra');
         const textoPorcentaje = document.getElementById('porcentaje');
         const pantallaCarga = document.getElementById('pantalla-carga');
         const contenidoPrincipal = document.getElementById('contenido-principal');
 
         // --- TRUCO EVITAR PANTALLA DE CARGA ---
-        // Revisamos si la URL contiene "?menu=true"
         const parametros = new URLSearchParams(window.location.search);
         
         if (parametros.get('menu') === 'true') {
-            // Si viene de regresar, ocultamos la carga al instante sin esperar
             pantallaCarga.style.display = 'none';
             contenidoPrincipal.style.display = 'block';
         } else {
-            // Si es la primera vez que abre la app, corre la barrita normalmente
             const intervalo = setInterval(() => {
                 progreso += 1;
                 barra.style.width = progreso + '%';
@@ -103,7 +99,7 @@
             }, 40);
         }
 
-        // Función que envía el tema seleccionado a los bloques de App Inventor o redirige en la Web
+        // --- AQUÍ ESTÁ LA FUNCIÓN ACTUALIZADA ---
         function seleccionarTema(tema) {
             if (tema === 'vocales') {
                 window.location.href = "vocales.html";
@@ -111,6 +107,8 @@
                 window.location.href = "colores.html";
             } else if (tema === 'animales') {
                 window.location.href = "animales.html";
+            } else if (tema === 'numeros') {
+                window.location.href = "numeros.html";
             } else {
                 if (window.AppInventor) {
                     window.AppInventor.setWebViewString(tema);
@@ -119,10 +117,6 @@
                 }
             }
         }
-    </script>
-
-</body>
-</html>
     </script>
 
 </body>
